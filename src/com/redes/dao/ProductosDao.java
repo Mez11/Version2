@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.mysql.jdbc.Connection;
 import com.redes.model.Productos;
-import javax.swing.JOptionPane;
 
 public class ProductosDao {
 	
