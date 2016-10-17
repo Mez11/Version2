@@ -28,35 +28,48 @@ public class AgregarProducto {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-        private JLabel lblImagen;
-        private JPanel filesPanel;
+	private JLabel lblImagen;
+	private JPanel filesPanel;
+	
 	/**
-	 * Launch the application.
+	 * Metodo que se ejecuta cuando
+	 * el usuario presiona el boton de "Aceptar" 
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgregarProducto window = new AgregarProducto();
-					//window.frmAgregarProducto.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private void onAcceptPressed( ){
+		//AGREGAR PRODUCTOS
+        Productos producto = new Productos();
+        String nombre =textField_1.getText() ;
+        String precio=textField_2.getText();
+        String Existencias=textField_3.getText();
+        String Descripcion=textField_4.getText();
+        String Origen=textField_5.getText();
+        if(nombre.replaceAll(" ", "").length()==0||precio.replaceAll(" ", "").length()==0||Existencias.replaceAll(" ", "").length()==0||Descripcion.replaceAll(" ", "").length()==0||Origen.replaceAll(" ", "").length()==0){
+            JOptionPane.showMessageDialog(filesPanel, "Se detectaron campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            
+        
+        producto.setNombre(nombre);
+        producto.setPrecio(Double.parseDouble(precio));
+        producto.setExistencias(Integer.parseInt(Existencias));
+        producto.setDescripcion(Descripcion);
+        producto.setOrigen(Origen);
+        //producto.setImagen( );
+        ProductosDao miProducto = new ProductosDao();
+        miProducto.inicializarConexion();
+        miProducto.create(producto);
+        int res=JOptionPane.showConfirmDialog(filesPanel, "¿Desea agregar otro producto?",null,JOptionPane.YES_NO_OPTION);
+        if(res==0){
+            frmAgregarProducto.dispose();
+            init();
+        }
+        else{
+            frmAgregarProducto.dispose();
+        }
+        }
 	}
 
-
-	 //* Create the application.
-
-	public void AgregarProducto() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	public void init() {
 		frmAgregarProducto = new JFrame();
 		frmAgregarProducto.setTitle("Agregar producto");
 		frmAgregarProducto.setBounds(100, 100, 450, 300);
@@ -118,39 +131,12 @@ public class AgregarProducto {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(319, 147, 117, 25);
 		frmAgregarProducto.getContentPane().add(btnAceptar);
-                btnAceptar.addActionListener(new ActionListener() {
-                        @Override
+		btnAceptar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-                         //AGREGAR PRODUCTOS
-                            Productos producto = new Productos();
-                            String nombre =textField_1.getText() ;
-                            String precio=textField_2.getText();
-                            String Existencias=textField_3.getText();
-                            String Descripcion=textField_4.getText();
-                            String Origen=textField_5.getText();
-                            if(nombre.replaceAll(" ", "").length()==0||precio.replaceAll(" ", "").length()==0||Existencias.replaceAll(" ", "").length()==0||Descripcion.replaceAll(" ", "").length()==0||Origen.replaceAll(" ", "").length()==0){
-                                JOptionPane.showMessageDialog(filesPanel, "Se detectarón campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
-                            }
-                            else{
-                                
-                            
-                            producto.setNombre(nombre);
-                            producto.setPrecio(Double.parseDouble(precio));
-                            producto.setExistencias(Integer.parseInt(Existencias));
-                            producto.setDescripcion(Descripcion);
-                            producto.setOrigen(Origen);
-                            ProductosDao miProducto = new ProductosDao();
-                            miProducto.inicializarConexion();
-                            miProducto.create(producto);
-                            int res=JOptionPane.showConfirmDialog(filesPanel, "¿Desea agregar otro producto?",null,JOptionPane.YES_NO_OPTION);
-                            if(res==0){
-                                frmAgregarProducto.dispose();
-                                initialize();
-                            }
-                            else{
-                                frmAgregarProducto.dispose();
-                            }
-                            }
+				//cuando el usuario presione "aceptar",
+				//llamar al metodo "onAcceptPressed"
+				onAcceptPressed( );
 			}
 		});
 		
