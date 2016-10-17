@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.redes.model.Productos;
 import com.redes.p2.cliente.view.CatalogoProductos;
+import com.redes.p2.model.Productos;
 
 /**
  *  Esta clase realiza el envio  al 

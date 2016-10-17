@@ -1,4 +1,4 @@
-package com.redes.model;
+package com.redes.p2.model;
 
 import java.io.Serializable;
 

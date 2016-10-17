@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.redes.dao.ProductosDao;
-import com.redes.model.Productos;
+import com.redes.p2.dao.ProductosDao;
+import com.redes.p2.model.Productos;
 
 public class EditarProducto  {
 	

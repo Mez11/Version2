@@ -6,8 +6,8 @@
 package com.aplicaciones.practicas.uno.server;
 import java.util.List;
 
-import com.redes.dao.ProductosDao;
-import com.redes.model.Productos;
+import com.redes.p2.dao.ProductosDao;
+import com.redes.p2.model.Productos;
 import com.redes.p2.servidor.view.CatalogoDeProductos;
 /**
  *

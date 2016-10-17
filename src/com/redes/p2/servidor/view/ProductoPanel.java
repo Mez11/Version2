@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.redes.model.Productos;
+import com.redes.p2.model.Productos;
 
 public class ProductoPanel extends JPanel {
 	/**

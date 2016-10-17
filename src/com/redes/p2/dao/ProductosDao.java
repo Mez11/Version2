@@ -1,4 +1,4 @@
-package com.redes.dao;
+package com.redes.p2.dao;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.jdbc.Connection;
-import com.redes.model.Productos;
+import com.redes.p2.model.Productos;
 
 public class ProductosDao {
 	

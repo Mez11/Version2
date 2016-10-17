@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.redes.model.Productos;
+import com.redes.p2.model.Productos;
 public class CatalogoDeProductos {
 
 	private JFrame frmCatalogoDeProductos;
