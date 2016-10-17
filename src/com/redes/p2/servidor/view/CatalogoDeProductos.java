@@ -27,13 +27,13 @@ public class CatalogoDeProductos {
 		frmCatalogoDeProductos.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 17));
 		frmCatalogoDeProductos.setForeground(Color.BLACK);
 		frmCatalogoDeProductos.setTitle("Catalogo de productos");
-		frmCatalogoDeProductos.setBounds(100, 100, 450, 300);
+		frmCatalogoDeProductos.setBounds(100, 100, 450, 383);
 		frmCatalogoDeProductos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCatalogoDeProductos.getContentPane().setLayout(null);
 		
 		//como prueba, desplegar el ultimo producto agregado
 		ProductoPanel prueba = new ProductoPanel( productosList.get( productosList.size( ) - 1 ) );
-		prueba.setBounds( 35, 39, 228, 216 );
+		prueba.setBounds( 35, 39, 228, 283 );
 		frmCatalogoDeProductos.getContentPane( ).add( prueba );
 		
 		JButton btnAgregarProducto = new JButton("Agregar Producto");
