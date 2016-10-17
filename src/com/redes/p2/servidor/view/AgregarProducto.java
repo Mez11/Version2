@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -36,6 +37,39 @@ public class AgregarProducto {
 	private File imageFile;
 	
 	/**
+	 * Metodo para extraer la imagen seleccionada por el usuario
+	 * 
+	 * @param producto
+	 */
+	private void extractImage( Productos producto ){
+		//donde vamos a guardar los bytes de la imagen
+		byte [] imageBytes = null;
+		
+		//validar que haya una imagen
+		if( imageFile == null ){
+			return;
+		}
+		
+		//extraer los bytes de la imagen
+		try {
+			imageBytes = Files.readAllBytes( imageFile.toPath( ) );
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//comprobar si hubo algun error en la lectura de bytes
+		if( imageBytes == null ){
+			System.out.println( "Hubo un error en la lectura de la imagen" );
+			return;
+		}
+		
+		//si todo fue bien, colocar los bytes en el bean
+		producto.setImagen( imageBytes );
+		//Listo!
+		
+	}//end extractImage
+	
+	/**
 	 * Metodo que se ejecuta cuando
 	 * el usuario presiona el boton de "Aceptar" 
 	 */
@@ -51,27 +85,24 @@ public class AgregarProducto {
             JOptionPane.showMessageDialog( null, "Se detectaron campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
         }
         else{
-            
-        
-        producto.setNombre(nombre);
-        producto.setPrecio(Double.parseDouble(precio));
-        producto.setExistencias(Integer.parseInt(Existencias));
-        producto.setDescripcion(Descripcion);
-        producto.setOrigen(Origen);
-        //producto.setImagen( );
-        ProductosDao miProducto = new ProductosDao();
-        miProducto.inicializarConexion();
-        miProducto.create(producto);
-        int res=JOptionPane.showConfirmDialog( null, "¿Desea agregar otro producto?",null,JOptionPane.YES_NO_OPTION);
-        if(res==0){
-            frmAgregarProducto.dispose();
-            init();
-        }
-        else{
-            frmAgregarProducto.dispose();
-        }
-        }
-	}
+	        producto.setNombre(nombre);
+	        producto.setPrecio(Double.parseDouble(precio));
+	        producto.setExistencias(Integer.parseInt(Existencias));
+	        producto.setDescripcion(Descripcion);
+	        producto.setOrigen(Origen);
+	        //****EXTRAER LA IMAGEN*****
+	        extractImage( producto );
+	        
+	        ProductosDao miProducto = new ProductosDao();
+	        miProducto.inicializarConexion();
+	        miProducto.create(producto);
+	        int res=JOptionPane.showConfirmDialog( null, "¿Desea agregar otro producto?",null,JOptionPane.YES_NO_OPTION);
+	        frmAgregarProducto.dispose();
+	        if( res == 0 ){
+	            init( );
+	        }
+        }//end if-else
+	}//end onAcceptPressed
 
 	/**
 	 * @wbp.parser.entryPoint
