@@ -1,23 +1,24 @@
 package com.redes.p2.servidor.view;
 
-import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.net.MalformedURLException;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.redes.dao.ProductosDao;
 import com.redes.model.Productos;
-import javax.swing.JOptionPane;
 
 public class AgregarProducto {
 
@@ -32,7 +33,7 @@ public class AgregarProducto {
 	/**
 	 * variable para guardar el archivo que el usuario haya elegido
 	 */
-	private File file;
+	private File imageFile;
 	
 	/**
 	 * Metodo que se ejecuta cuando
@@ -182,13 +183,39 @@ public class AgregarProducto {
 		chooser.setFileFilter(filtroImagen);
 		int r = chooser.showOpenDialog( null );
 		if( r == JFileChooser.APPROVE_OPTION ){
-			//guardar el archivo elegido en la variable global
-			file = chooser.getSelectedFile( );
-			//desplegar la imagen en el JLabel
-			ImageIcon image = new ImageIcon( file.getAbsolutePath() );
-			paintModel( image );
+			//llamamos al manejador del evento "Imagen seleccionada",
+			//enviandole el archivo que el usuario elijio
+			onSelectedImage( chooser.getSelectedFile( ) );
 		}//end if approved
 	}//end getImagen
+	
+	/**
+	 * Metodo a ejecutar cuando el usuario elije una imagen
+	 * @param selectedFile Archivo que el usuario escogio a traves
+	 * del {@link JFileChooser}
+	 */
+	private void onSelectedImage( File selectedFile ){
+		BufferedImage originalImage = null;
+		Image resizedImage = null;
+		ImageIcon image = null;
+		
+		try {
+			//guardar el archivo elegido en la variable global
+			imageFile = selectedFile;
+			//Leer la imagen
+			originalImage = ImageIO.read( imageFile );
+			//Escalar la imagen
+			//(Modificar su tamaño de tal forma que ocupe perfectamente el JLabel
+			//en el que esta contenida)
+			resizedImage = originalImage.getScaledInstance( 
+					lblImagen.getWidth(), lblImagen.getHeight( ), Image.SCALE_SMOOTH );			
+			//desplegar la imagen en el JLabel
+			image = new ImageIcon( resizedImage );
+			paintModel( image );
+		} catch (IOException e) {
+			e.printStackTrace();
+		}//end try-catch
+	}//end onSelectedImage
 	
 	
 	private void paintModel(ImageIcon img){
