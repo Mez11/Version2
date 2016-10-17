@@ -1,23 +1,18 @@
 package com.redes.p2.servidor.view;
 
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -36,34 +31,8 @@ public class EditarProducto  {
 	private JTextField textField_5;
 	private JLabel lblImagen;
     private JPanel filesPanel;
-
-	/**
-	 * Launch the application.
-	 */
-/**	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditarProducto window = new EditarProducto();
-					window.frmEditarProducto.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}**/
-
-	/**
-	 * Create the application.
-	 */
-	public EditarProducto() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	
+	public void init() {
 		frmEditarProducto = new JFrame();
 		frmEditarProducto.setTitle("Editar producto");
 		frmEditarProducto.setBounds(100, 100, 450, 300);
@@ -164,7 +133,7 @@ public class EditarProducto  {
                  int res=JOptionPane.showConfirmDialog(filesPanel, "¿Desea editar otro producto?",null,JOptionPane.YES_NO_OPTION);
                  if(res==0){
                      frmEditarProducto.dispose();
-                     initialize();
+                     init();
                  }
                  else{
                      frmEditarProducto.dispose();
@@ -214,16 +183,11 @@ public class EditarProducto  {
          chooser.setFileFilter(filtroImagen);
          int r=chooser.showOpenDialog(null);
          	if(r==JFileChooser.APPROVE_OPTION){
-         		try {
-         			File f=chooser.getSelectedFile();
+         		ImageIcon img = new ImageIcon( chooser.getSelectedFile().getAbsolutePath( ) );
    
-         			ImageIcon img=new ImageIcon(chooser.getSelectedFile().toURL());
-         			paintModel(img);
+         		//ImageIcon img=new ImageIcon(chooser.getSelectedFile().toURL());
+         		paintModel(img);
   
-         		} catch (MalformedURLException e1) {
-         			// TODO Auto-generated catch block
-         			e1.printStackTrace();
-         		}
          	}
          
      }

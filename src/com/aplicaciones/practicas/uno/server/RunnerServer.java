@@ -4,7 +4,6 @@ package com.aplicaciones.practicas.uno.server;
 
 public class RunnerServer {
 	private static final int DEFAULT_PORT = 4070;
-	private static final String DEFAULT_SAVE_LOCATION = "/home/pma/Documents/";
 	private static EnvioCatalogo envio;
 	
 	private static void addShutdownHook( ){
@@ -16,25 +15,15 @@ public class RunnerServer {
 	}
 	
 	public static void main( String args[] ){
-		
 		int port;
-		
 		port = DEFAULT_PORT;
-		
-		System.out.println( "Usando el puerto " + port);
+		System.out.println( "Usando el puerto " + port );
 		envio = new EnvioCatalogo( );
-                
-               
-               
-                
 		if( !envio.init( port ) ){
 			System.out.println( "Previos errores, el envio no puede iniciar @.#.." );
-			
 		}
 		envio.catalogo();
 		addShutdownHook( );
-		
-		
 	}
 	
 }

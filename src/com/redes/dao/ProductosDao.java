@@ -100,7 +100,7 @@ public class ProductosDao {
 				Class.forName("com.mysql.jdbc.Driver");//El paquete de Class 
 				
 				con=(Connection)
-						DriverManager.getConnection("jdbc:mysql://localhost:3306/Productos","root","interpol11");
+						DriverManager.getConnection("jdbc:mysql://localhost:3306/Productos","root","");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

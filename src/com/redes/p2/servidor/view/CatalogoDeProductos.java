@@ -1,51 +1,20 @@
 package com.redes.p2.servidor.view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.text.html.ImageView;
-import javax.swing.text.Element;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
 import java.awt.Color;
-import java.awt.Window.Type;
 import java.awt.Font;
-import com.redes.p2.servidor.view.AgregarProducto;
-import com.redes.p2.servidor.view.EditarProducto;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 public class CatalogoDeProductos {
 
 	private JFrame frmCatalogoDeProductos;
-        
-	/**
-	 * Launch the application.
-	 */
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CatalogoDeProductos window = new CatalogoDeProductos();
-					window.frmCatalogoDeProductos.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	} */
 
-	/**
-	 * Create the application.
-	 */
-	public void CatalogoDeProductos() {
-		initialize();
-	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	public void init() {
 		frmCatalogoDeProductos = new JFrame();
 		frmCatalogoDeProductos.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 17));
 		frmCatalogoDeProductos.setForeground(Color.BLACK);

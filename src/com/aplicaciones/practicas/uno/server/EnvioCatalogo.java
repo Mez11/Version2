@@ -7,15 +7,16 @@ package com.aplicaciones.practicas.uno.server;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
+
 import com.redes.dao.ProductosDao;
+import com.redes.model.Productos;
 import com.redes.p2.servidor.view.AgregarProducto;
 import com.redes.p2.servidor.view.CatalogoDeProductos;
 import com.redes.p2.servidor.view.EditarProducto;
-
-import java.io.ObjectOutputStream;
-import java.util.List;
 /**
  *
  * @author 
@@ -37,16 +38,16 @@ public class EnvioCatalogo {
 		}
 	}
         
-        public void catalogo(){
+    public void catalogo(){
 		Socket socket = null;
 		DataInputStream dis = null;
 		DataOutputStream dos = null;
-                ObjectOutputStream oos = null;
+        ObjectOutputStream oos = null;
 		ProductosDao miProducto = new ProductosDao();
-                List list = null;
-                CatalogoDeProductos catalogoDeProductos = new CatalogoDeProductos();
-                AgregarProducto agregarProducto = new AgregarProducto();
-                EditarProducto editarProducto = new EditarProducto();	
+        List<Productos> list = null;
+        CatalogoDeProductos catalogoDeProductos = new CatalogoDeProductos();
+        AgregarProducto agregarProducto = new AgregarProducto();
+        EditarProducto editarProducto = new EditarProducto();	
                 
                 
 		
@@ -59,27 +60,19 @@ public class EnvioCatalogo {
                     
 			System.out.println( "Esperando conexion @.%..." );
                    
-                         System.out.println("Conectando a la base de datos");
-                        miProducto.inicializarConexion();
-                        
-                        System.out.println("Obteniendo catalogo");
-                        list = miProducto.getProductos();
-                        System.out.println("Agregando productos");
-                        
-                        
-                        System.out.println("Editando productos");
-                        
-		
-
-
-
-                     //CARGA CATALOGO DE PRODUCTOS
-                    
-                    
-                    
-                      catalogoDeProductos.CatalogoDeProductos();
-                      agregarProducto.AgregarProducto();
-                      editarProducto.getImagen();
+            System.out.println("Conectando a la base de datos");
+            miProducto.inicializarConexion();
+            
+            System.out.println("Obteniendo catalogo");
+            list = miProducto.getProductos();
+            System.out.println("Agregando productos");
+            System.out.println("Editando productos");
+            //CARGA CATALOGO DE PRODUCTOS
+            //EDIT: Al inicio, solo se debe mostrar el catalogo de productos
+            //(No los otros frames)
+            catalogoDeProductos.init( );
+            //agregarProducto.AgregarProducto();
+            //editarProducto.getImagen();
                       
 			socket = serverSocket.accept( );
                         
