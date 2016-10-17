@@ -1,10 +1,12 @@
 package com.redes.model;
 
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
-import java.sql.Blob;
 
 public class Productos implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6054418405462278963L;
 	/**Parametros provenientes de la BD**/
 	private int idProductos;
 	private String nombre;
@@ -13,15 +15,7 @@ public class Productos implements Serializable {
 	private String descripcion;
 	private String origen;
 	private byte[] imagen;
-	private transient BufferedImage image = null;
 
-	
-	public BufferedImage getImage() {
-		return image;
-	}
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
 	public int getIdProductos() {
 		return idProductos;
 	}
