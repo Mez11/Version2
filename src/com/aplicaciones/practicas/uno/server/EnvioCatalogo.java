@@ -26,17 +26,17 @@ public class EnvioCatalogo {
         System.out.println("Conectando a la base de datos");
         miProducto.inicializarConexion();
         
-        System.out.println("Obteniendo catalogo");
+        System.out.println("Obteniendo catalogos");
         list = miProducto.getProductos();
         
         //CARGA CATALOGO DE PRODUCTOS
         //EDIT: Al inicio, solo se debe mostrar el catalogo de productos
         //(No los otros frames)
         System.out.println( "Cargando vista de catalogos..." );
-        catalogoDeProductos.init( );
+        catalogoDeProductos.init( list );
         //agregarProducto.AgregarProducto();
         //editarProducto.getImagen();
 		
-        System.out.println(list);
+        System.out.println( list );
 	}
 }
