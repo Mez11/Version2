@@ -58,7 +58,7 @@ public class CatalogoDeProductos {
                
                     public void actionPerformed(ActionEvent e) {
                        AgregarProducto miProducto = new AgregarProducto();
-                       miProducto.AgregarProducto();
+                       miProducto.init( );
                     }
                     
                 });
