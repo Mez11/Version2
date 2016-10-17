@@ -5,14 +5,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -23,29 +21,27 @@ public class EditarProducto  {
 	
 
 	private JFrame frmEditarProducto;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField idTf;
+	private JTextField nombreTf;
+	private JTextField precioTf;
+	private JTextField existenciasTf;
+	private JTextField descripcionTf;
+	private JTextField origenTf;
 	private JLabel lblImagen;
-    private JPanel filesPanel;
 	
-	public void init() {
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	public void init( Productos producto ) {
 		frmEditarProducto = new JFrame();
 		frmEditarProducto.setTitle("Editar producto");
 		frmEditarProducto.setBounds(100, 100, 450, 300);
 		frmEditarProducto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEditarProducto.getContentPane().setLayout(null);
 		
-		filesPanel = new JPanel();
-		filesPanel.setLayout(new BoxLayout(filesPanel, BoxLayout.Y_AXIS));
-		
 		
 		lblImagen = new JLabel("Imagen");
 		lblImagen.setBounds(138, 12, 122, 62);
-		filesPanel.add(lblImagen);
 		frmEditarProducto.getContentPane().add(lblImagen);
 		
 		JButton btnElegirImagen = new JButton("Eleguir imagen");
@@ -107,13 +103,13 @@ public class EditarProducto  {
             	 List<Productos> list= new ArrayList<Productos>( );
             	 Productos aux = new Productos();
             	 
-                 String nombre =textField_1.getText() ;
-                 String precio=textField_2.getText();
-                 String Existencias=textField_3.getText();
-                 String Descripcion=textField_4.getText();
-                 String Origen=textField_5.getText();
+                 String nombre =nombreTf.getText() ;
+                 String precio=precioTf.getText();
+                 String Existencias=existenciasTf.getText();
+                 String Descripcion=descripcionTf.getText();
+                 String Origen=origenTf.getText();
                  if(nombre.replaceAll(" ", "").length()==0||precio.replaceAll(" ", "").length()==0||Existencias.replaceAll(" ", "").length()==0||Descripcion.replaceAll(" ", "").length()==0||Origen.replaceAll(" ", "").length()==0){
-                     JOptionPane.showMessageDialog(filesPanel, "Se detectarón campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
+                     JOptionPane.showMessageDialog( null, "Se detectarón campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
                  }
                  else{
                     
@@ -130,10 +126,10 @@ public class EditarProducto  {
                  miProducto.getEventoById(2);
                  miProducto.update(getEventoById);
                 
-                 int res=JOptionPane.showConfirmDialog(filesPanel, "¿Desea editar otro producto?",null,JOptionPane.YES_NO_OPTION);
+                 int res=JOptionPane.showConfirmDialog( null, "¿Desea editar otro producto?",null,JOptionPane.YES_NO_OPTION);
                  if(res==0){
                      frmEditarProducto.dispose();
-                     init();
+                     init( producto );
                  }
                  else{
                      frmEditarProducto.dispose();
@@ -145,35 +141,36 @@ public class EditarProducto  {
 		
 		
 		//old
-		textField = new JTextField();
-		textField.setBounds(115, 123, 124, 19);
-		frmEditarProducto.getContentPane().add(textField);
-		textField.setColumns(10);
+		idTf = new JTextField( Integer.toString( producto.getIdProductos( ) ) );
+		idTf.setEditable(false);
+		idTf.setBounds(115, 123, 124, 19);
+		frmEditarProducto.getContentPane().add(idTf);
+		idTf.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(115, 142, 124, 19);
-		frmEditarProducto.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		nombreTf = new JTextField( producto.getNombre( ) );
+		nombreTf.setBounds(115, 142, 124, 19);
+		frmEditarProducto.getContentPane().add(nombreTf);
+		nombreTf.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(115, 173, 124, 19);
-		frmEditarProducto.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		precioTf = new JTextField( producto.getPrecio( ).toString( ) );
+		precioTf.setBounds(115, 173, 124, 19);
+		frmEditarProducto.getContentPane().add(precioTf);
+		precioTf.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(115, 200, 124, 19);
-		frmEditarProducto.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		existenciasTf = new JTextField( Integer.toString( producto.getExistencias( ) ) );
+		existenciasTf.setBounds(115, 200, 124, 19);
+		frmEditarProducto.getContentPane().add(existenciasTf);
+		existenciasTf.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(349, 121, 87, 19);
-		frmEditarProducto.getContentPane().add(textField_4);
-		textField_4.setColumns(10);
+		descripcionTf = new JTextField( producto.getDescripcion( ) );
+		descripcionTf.setBounds(349, 121, 87, 19);
+		frmEditarProducto.getContentPane().add(descripcionTf);
+		descripcionTf.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(345, 142, 91, 19);
-		frmEditarProducto.getContentPane().add(textField_5);
-		textField_5.setColumns(10);
+		origenTf = new JTextField( producto.getOrigen( ) );
+		origenTf.setBounds(345, 142, 91, 19);
+		frmEditarProducto.getContentPane().add(origenTf);
+		origenTf.setColumns(10);
 		frmEditarProducto.setVisible(true);
 	}
 	

@@ -80,6 +80,9 @@ public class ProductoPanel extends JPanel {
 		JButton btnNewButton = new JButton( "Editar" );
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//cuando se de clic en "editar", llamar a la ventanita
+				//de editar
+				new EditarProducto( ).init( producto );
 			}
 		});
 		btnNewButton.setBounds(25, 190, 117, 25);
