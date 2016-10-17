@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.redes.p2.dao.ProductosDao;
 import com.redes.p2.model.Productos;
+import com.redes.p2.utis.ImageUtils;
 
 public class EditarProducto  {
 	
@@ -40,8 +41,9 @@ public class EditarProducto  {
 		frmEditarProducto.getContentPane().setLayout(null);
 		
 		
-		lblImagen = new JLabel("Imagen");
+		lblImagen = new JLabel( );
 		lblImagen.setBounds(138, 12, 122, 62);
+		ImageUtils.displayPrettyImage( producto.getImagen(), lblImagen);
 		frmEditarProducto.getContentPane().add(lblImagen);
 		
 		JButton btnElegirImagen = new JButton("Eleguir imagen");
