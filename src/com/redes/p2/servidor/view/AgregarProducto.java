@@ -29,7 +29,10 @@ public class AgregarProducto {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JLabel lblImagen;
-	private JPanel filesPanel;
+	/**
+	 * variable para guardar el archivo que el usuario haya elegido
+	 */
+	private File file;
 	
 	/**
 	 * Metodo que se ejecuta cuando
@@ -44,7 +47,7 @@ public class AgregarProducto {
         String Descripcion=textField_4.getText();
         String Origen=textField_5.getText();
         if(nombre.replaceAll(" ", "").length()==0||precio.replaceAll(" ", "").length()==0||Existencias.replaceAll(" ", "").length()==0||Descripcion.replaceAll(" ", "").length()==0||Origen.replaceAll(" ", "").length()==0){
-            JOptionPane.showMessageDialog(filesPanel, "Se detectaron campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog( null, "Se detectaron campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
         }
         else{
             
@@ -58,7 +61,7 @@ public class AgregarProducto {
         ProductosDao miProducto = new ProductosDao();
         miProducto.inicializarConexion();
         miProducto.create(producto);
-        int res=JOptionPane.showConfirmDialog(filesPanel, "¿Desea agregar otro producto?",null,JOptionPane.YES_NO_OPTION);
+        int res=JOptionPane.showConfirmDialog( null, "¿Desea agregar otro producto?",null,JOptionPane.YES_NO_OPTION);
         if(res==0){
             frmAgregarProducto.dispose();
             init();
@@ -69,26 +72,25 @@ public class AgregarProducto {
         }
 	}
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public void init() {
 		frmAgregarProducto = new JFrame();
 		frmAgregarProducto.setTitle("Agregar producto");
 		frmAgregarProducto.setBounds(100, 100, 450, 300);
 		frmAgregarProducto.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAgregarProducto.getContentPane().setLayout(null);
-                
-        filesPanel = new JPanel();
-		filesPanel.setLayout(new BoxLayout(filesPanel, BoxLayout.Y_AXIS));
-		
+				
 		lblImagen = new JLabel("Imagen");
 		lblImagen.setBounds(181, 12, 70, 45);
-                filesPanel.add(lblImagen);
-		frmAgregarProducto.getContentPane().add(lblImagen);
+		frmAgregarProducto.getContentPane().add( lblImagen );
 		
 		JButton btnEleguirImagen = new JButton("Eleguir imagen");
 		btnEleguirImagen.addActionListener(new ActionListener() {
-                        @Override
+			@Override
 			public void actionPerformed(ActionEvent e) {
-                            getImagen();
+				getImagen( );
 			}
 		});
 		btnEleguirImagen.setBounds(146, 69, 144, 25);
@@ -171,38 +173,27 @@ public class AgregarProducto {
 		textField_5.setBounds(110, 236, 124, 19);
 		frmAgregarProducto.getContentPane().add(textField_5);
 		textField_5.setColumns(10);
-                frmAgregarProducto.setVisible(true);
+        frmAgregarProducto.setVisible(true);
 	}
-        
-        public void getImagen(){
-            JFileChooser chooser = new JFileChooser( );
-            FileNameExtensionFilter filtroImagen= new FileNameExtensionFilter("JPG, PNG","jpg","png");
-            chooser.setFileFilter(filtroImagen);
-            int r=chooser.showOpenDialog(null);
-    if(r==JFileChooser.APPROVE_OPTION){
-     try {
-      File f=chooser.getSelectedFile();
-      
-      ImageIcon img=new ImageIcon(chooser.getSelectedFile().toURL());
-      paintModel(img);
-     
-     } catch (MalformedURLException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
-     }
-    }
-            
-        }
-        
-        public void paintModel(ImageIcon img){
-	     //	filesPanel.removeAll( );
-	        lblImagen.removeAll();
-                lblImagen.setIcon(img);
-		
-			//filesPanel.add(lblImagen );
-		
-		frmAgregarProducto.getContentPane().add(lblImagen);
-		
-	}
-
+	
+	private void getImagen(){
+		JFileChooser chooser = new JFileChooser( );
+		FileNameExtensionFilter filtroImagen= new FileNameExtensionFilter("JPG, PNG","jpg","png");
+		chooser.setFileFilter(filtroImagen);
+		int r = chooser.showOpenDialog( null );
+		if( r == JFileChooser.APPROVE_OPTION ){
+			//guardar el archivo elegido en la variable global
+			file = chooser.getSelectedFile( );
+			//desplegar la imagen en el JLabel
+			ImageIcon image = new ImageIcon( file.getAbsolutePath() );
+			paintModel( image );
+		}//end if approved
+	}//end getImagen
+	
+	
+	private void paintModel(ImageIcon img){
+		lblImagen.removeAll( );
+		lblImagen.setIcon( img );
+		frmAgregarProducto.getContentPane( ).add( lblImagen );
+	}//end paintModel
 }
